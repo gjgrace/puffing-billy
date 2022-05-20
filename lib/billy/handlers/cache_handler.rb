@@ -51,8 +51,8 @@ module Billy
       if request_uri.query
         params = CGI.parse(request_uri.query)
         callback_name = Billy.config.dynamic_jsonp_callback_name
-        if params[callback_name].any? && response[:content].match(/\w+\(/)
-          response[:content].sub!(/\w+\(/, params[callback_name].first + '(')
+        if params[callback_name].any? && response[:content].match(/^.+?\(/)
+          response[:content].sub!(/^.+?\(/, params[callback_name].first + '(')
         end
       end
     end
